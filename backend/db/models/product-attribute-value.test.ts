@@ -8,13 +8,13 @@ describe("model", () => {
     // Arrange
     const transaction = await sequelize.transaction();
     const att = await ProductAttribute.create({
-    name: "Test Product Attribute",
+      name: "Test Product Attribute",
     });
     const data = {
-        productAttributeId: att.dataValues.id,
-        value: "Test Attribute Value",
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      productAttributeId: att.dataValues.id,
+      value: "Test Attribute Value",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
     // Act
     const res = await ProductAttributeValue.create(data, { transaction });
@@ -27,9 +27,15 @@ describe("model", () => {
     // Assert
     expect(expectedRes.dataValues.id).toBe(res.dataValues.id);
     expect(expectedRes.dataValues.value).toBe(data.value);
-    expect(expectedRes.dataValues.productAttributeId).toBe(data.productAttributeId);
-    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(data.createdAt.toUTCString());
-    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(data.updatedAt.toUTCString());
+    expect(expectedRes.dataValues.productAttributeId).toBe(
+      data.productAttributeId,
+    );
+    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(
+      data.createdAt.toUTCString(),
+    );
+    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(
+      data.updatedAt.toUTCString(),
+    );
     await transaction.rollback();
   });
 });

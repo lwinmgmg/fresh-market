@@ -26,8 +26,12 @@ describe("model", () => {
     expect(expectedRes.dataValues.name).toBe(marketVal.name);
     expect(expectedRes.dataValues.latitude).toBe(marketVal.latitude);
     expect(expectedRes.dataValues.longitude).toBe(marketVal.longitude);
-    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(marketVal.createdAt.toUTCString());
-    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(marketVal.updatedAt.toUTCString());
+    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(
+      marketVal.createdAt.toUTCString(),
+    );
+    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(
+      marketVal.updatedAt.toUTCString(),
+    );
     await transaction.rollback();
   });
 });

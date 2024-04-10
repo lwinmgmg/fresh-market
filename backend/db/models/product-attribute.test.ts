@@ -22,8 +22,12 @@ describe("model", () => {
     // Assert
     expect(expectedRes.dataValues.id).toBe(res.dataValues.id);
     expect(expectedRes.dataValues.name).toBe(data.name);
-    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(data.createdAt.toUTCString());
-    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(data.updatedAt.toUTCString());
+    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(
+      data.createdAt.toUTCString(),
+    );
+    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(
+      data.updatedAt.toUTCString(),
+    );
     await transaction.rollback();
   });
 });

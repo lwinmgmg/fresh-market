@@ -7,12 +7,14 @@ describe("model", () => {
   it("Should run without error for product varient", async () => {
     // Arrange
     const transaction = await sequelize.transaction();
-    const product = await Product.create({
+    const product = await Product.create(
+      {
         name: "Test Product",
-        description: "Test Product Description"
-    })
+        description: "Test Product Description",
+      },
+      { transaction },
+    );
     const productVariantVal = {
-      name: "Test ProductVariant",
       productId: product.dataValues.id,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -29,8 +31,12 @@ describe("model", () => {
     expect(expectedRes.dataValues.id).toBe(res.dataValues.id);
     expect(expectedRes.dataValues.productId).toBe(productVariantVal.productId);
     expect(expectedRes.dataValues.active).toBe(true);
-    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(productVariantVal.createdAt.toUTCString());
-    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(productVariantVal.updatedAt.toUTCString());
+    expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(
+      productVariantVal.createdAt.toUTCString(),
+    );
+    expect(expectedRes.dataValues.updatedAt.toUTCString()).toBe(
+      productVariantVal.updatedAt.toUTCString(),
+    );
     await transaction.rollback();
   });
 });
