@@ -1,7 +1,7 @@
 import { Model, Optional, DataTypes } from "sequelize";
 import { sequelize } from "./connect";
 
-interface ProductAttributes {
+export interface ProductAttributes {
   id: number;
   name: string;
   description: string;
@@ -9,7 +9,10 @@ interface ProductAttributes {
   updatedAt: Date;
 }
 
-type ProductCreationAttributes = Optional<ProductAttributes, "id" | "name">;
+export type ProductCreationAttributes = Optional<
+  ProductAttributes,
+  "id" | "createdAt"
+>;
 
 export class Product extends Model<
   ProductAttributes,

@@ -1,11 +1,19 @@
 import express from "express";
-import { sequelize } from "./db/models/connect";
-import { Market } from "./db/models/market";
-import { ProductAttributeValue } from "./db/models/product-attribute-value";
-import { ProductAttribute } from "./db/models/product-attribute";
+import { router as productRouter } from "./api/rest/products/v1";
+import LoggerMw from "./middlewares/logger";
+import cors from "cors";
 
 const app = express();
+
+// CORS
+app.use(cors());
+
+app.use(LoggerMw, express.json());
+
+app.use("/api/rest/products", productRouter);
 
 app.listen(5000, () => {
   console.log("App is starting on port : " + "5000");
 });
+
+export default app;

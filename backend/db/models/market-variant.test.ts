@@ -1,7 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { Product } from "./product";
-import { ProductAttribute } from "./product-attribute";
-import { ProductLine } from "./product-line";
 import { sequelize } from "./connect";
 import { ProductVariant } from "./product-variant";
 import { MarketVariant } from "./market-variant";
@@ -36,6 +34,9 @@ describe("model", () => {
       name: "Test ProductLine",
       marketId: market.dataValues.id,
       productVariantId: pv.dataValues.id,
+      price: 99.99,
+      soldQty: 10,
+      avaQty: 90,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -50,6 +51,9 @@ describe("model", () => {
     // Assert
     expect(expectedRes.dataValues.id).toBe(res.dataValues.id);
     expect(expectedRes.dataValues.marketId).toBe(data.marketId);
+    expect(expectedRes.dataValues.price).toBe(data.price);
+    expect(expectedRes.dataValues.soldQty).toBe(data.soldQty);
+    expect(expectedRes.dataValues.avaQty).toBe(data.avaQty);
     expect(expectedRes.dataValues.productVariantId).toBe(data.productVariantId);
     expect(expectedRes.dataValues.createdAt.toUTCString()).toBe(
       data.createdAt.toUTCString(),
